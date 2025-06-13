@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { MdKeyboardDoubleArrowDown, MdKeyboardDoubleArrowUp } from "react-icons/md";
 
 function DropdownMenu({ title, items }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false); // Trạng thái hover
   const dropdownRef = useRef(null); // Khai báo ref để kiểm tra click ngoài vùng dropdown
-
+const closeTimeout = useRef(null);
   // Đóng dropdown khi click ra ngoài
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -22,23 +23,37 @@ function DropdownMenu({ title, items }) {
 
   return (
     <div
-      className="relative group"
+      className="relative group   text-black dark:text-white  transition-colors duration-300"
       ref={dropdownRef}
-      onMouseEnter={() => setIsHovered(true)} // Khi hover vào title
-      onMouseLeave={() => setIsHovered(false)} // Khi bỏ hover
+      onMouseEnter={() => {
+    clearTimeout(closeTimeout.current);
+    setIsHovered(true);
+  }}
+  onMouseLeave={() => {
+    closeTimeout.current = setTimeout(() => {
+      setIsHovered(false);
+      setIsOpen(false);
+    }, 200);
+  }}
     >
       <button
         onClick={() => setIsOpen(!isOpen)} // Khi click vào title để toggle menu
         onMouseEnter={() => setIsOpen(true)} // Khi hover vào title để mở menu
         onMouseLeave={() => !isHovered && setIsOpen(false)} // Khi bỏ hover và không còn hover trên title thì đóng menu
         className={`pb-1 flex items-center ${
-          isOpen ? 'text-blue-500' : 'text-gray-700 group-hover:text-blue-500'
-        }`}
+          isOpen ? 'text-blue-500' : 'text-black group-hover:text-blue-500 dark:text-white'
+        } ` }
       >
         {title}
 
-        {/* Đổi icon khi hover vào title */}
-        <img
+        
+       
+          {(isHovered || isOpen) ? (
+    <MdKeyboardDoubleArrowUp className="w-4 h-6  text-inherit group-hover/button:text-blue-500 transition-colors duration-300" />
+  ) : (
+    <MdKeyboardDoubleArrowDown className="w-4 h-6  text-inherit group-hover/button:text-blue-500 transition-colors duration-300" />
+  )}
+        {/* <img
           src={
             isHovered
               ? '/icon/next-top.svg'
@@ -48,7 +63,8 @@ function DropdownMenu({ title, items }) {
           }
           className="w-4 h-4 ml-1 transition-all"
           alt="icon"
-        />
+          onMouseLeave={() => setIsHovered(false)}
+        /> */}
       </button>
 
       {/* Gạch dưới */}
@@ -56,7 +72,19 @@ function DropdownMenu({ title, items }) {
 
       {/* Dropdown content */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-56 bg-white shadow-md z-50 overflow-hidden">
+        <div className="absolute left-0 mt-2 w-56 bg-white shadow-md z-50 overflow-hidden dark:bg-gray-800 "
+        onMouseEnter={() => {
+    clearTimeout(closeTimeout.current);
+    setIsHovered(true);
+  }}
+  onMouseLeave={() => {
+    closeTimeout.current = setTimeout(() => {
+      setIsHovered(false);
+      setIsOpen(false);
+    }, 200);
+  }}
+        >
+          
           {items.map((item, idx) => (
             <a
               key={idx}
@@ -67,7 +95,7 @@ function DropdownMenu({ title, items }) {
               <span className="pointer-events-none absolute left-[-100%] top-0 h-10 w-full flex items-center pl-3 text-sm font-medium text-white bg-blue-500 transition-all duration-500 ease-in-out group-hover/item:left-0"></span>
 
               {/* Nội dung chữ */}
-              <span className="relative text-black group-hover/item:text-white z-10">
+              <span className="relative text-black group-hover/item:text-white z-10 dark:text-white">
                 {item.label}
               </span>
             </a>

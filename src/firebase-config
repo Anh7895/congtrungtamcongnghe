@@ -1,0 +1,20 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs ,doc,  } from "firebase/firestore";
+import { getDatabase } from 'firebase/database';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDBz6IxVFGTjsRCE1FYw_1XAIyPI0g6Ols",
+  authDomain: "website-tt-324cd.firebaseapp.com",
+  projectId: "website-tt-324cd",
+  storageBucket: "website-tt-324cd.firebasestorage.app",
+  messagingSenderId: "521392492483",
+  appId: "1:521392492483:web:44905e2e270f9b082f3776",
+  measurementId: "G-YFL4LX4CEF" 
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const database = getDatabase(app);
+
+export { db, collection, getDocs ,doc, database};

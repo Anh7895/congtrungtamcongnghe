@@ -85,3 +85,29 @@ function App() {
 export default App;
 
 # 11 npm run dev
+# 12 thêm icon theo thư viện
+https://react-icons.github.io/react-icons/search/#q=home
+npm install react-icons
+import { GoHome } from "react-icons/go";
+<GoHome />
+# 13 mardown
+## Tiêu đề in đậm ở giữa
+<div style="text-align: center;">
+  <span style="color:black; font-size:24px; font-weight:bold;">
+
+  </span>
+</div><br/>
+## tab vào 
+<p style="text-indent: 2em;">
+
+</p><br/>
+
+## in đậm
+<strong>
+
+</strong>
+
+## in nghiêng
+<em>
+
+</em>

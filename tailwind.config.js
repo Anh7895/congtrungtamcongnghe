@@ -4,8 +4,17 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
+
   theme: {
     extend: {
+      fontFamily: {
+        tahoma: ['Tahoma', 'sans-serif'],
+        anton: ['Anton', 'sans-serif'],
+        robotoCondensed: ['"Roboto Condensed"', 'sans-serif'],
+                openSansCondensed: ['"Open Sans Condensed"', 'sans-serif'],
+
+      },
       animation: {
         'slide': 'slide 4s ease-in-out forwards',
       },
@@ -21,5 +30,6 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/line-clamp')],
+
 };
