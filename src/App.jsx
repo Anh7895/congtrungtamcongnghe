@@ -29,6 +29,7 @@ import Exel from "./pages/exel/Exel";
 import TimHieuThem from "./pages/gioi-thieu/TimHieuThem";
 import GopExel from "./pages/exel/GopExel";
 import Markdown from "./pages/markdown/Markdown";
+import ZaloButton from "./components/ZaloButton";
 
   function App() {
     return (
@@ -70,9 +71,15 @@ import Markdown from "./pages/markdown/Markdown";
 <Route path="/tai-lieu/:id" element={<TaiLieuDetail />} />
           </Routes>
         </div>
+        <div className="fixed bottom-64  right-4 ">
+           <ZaloButton/>
+        </div>
+        
         <div className="fixed bottom-48  right-4 ">
            <DarkModeToggle/>
         </div>
+        
+        
          <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="fixed bottom-24 right-4 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg z-50"
@@ -80,6 +87,8 @@ import Markdown from "./pages/markdown/Markdown";
         >
           <FaAngleDoubleUp size={24} />
         </button>
+
+
  <button
           onClick={() => window.location.href = "tel: 02462739719"} // thay số điện thoại vào đây
           className="fixed bottom-8 right-4 bg-green-600 hover:bg-green-700 text-white p-3 rounded-full shadow-lg z-50"
